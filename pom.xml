@@ -6,14 +6,22 @@
 
     <groupId>ch.pgras.kafka</groupId>
     <artifactId>kafka-learning</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>kafka-basics</module>
+        <module>kafka-producer-twitter</module>
+        <module>kafka-consumer-elasticsearch</module>
+        <module>kafka-streams-filter-tweets</module>
+        <module>kafka-streams-word-count</module>
+    </modules>
 
-<dependencies>
+    <dependencies>
         <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-streams -->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-streams</artifactId>
-            <version>2.0.0</version>
+            <version>2.1.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
@@ -22,12 +30,12 @@
             <version>1.7.25</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-        <dependency>
+        <!--dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.25</version>
             <scope>test</scope>
-        </dependency>
+        </dependency-->
     </dependencies>
 
      <build>
@@ -54,7 +62,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>ch.pgras.kafka.learning.kafkastreams.KafkaStreamsApp</mainClass>
+                            <mainClass>kafkastreams.KafkaStreamsApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
