@@ -14,6 +14,7 @@
         <module>kafka-consumer-elasticsearch</module>
         <module>kafka-streams-filter-tweets</module>
         <module>kafka-streams-word-count</module>
+        <module>kafka-admin</module>
     </modules>
 
     <dependencies>
