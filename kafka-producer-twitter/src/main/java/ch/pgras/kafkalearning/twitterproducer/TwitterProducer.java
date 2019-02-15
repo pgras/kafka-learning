@@ -1,6 +1,5 @@
 package ch.pgras.kafkalearning.twitterproducer;
 
-import com.google.common.collect.Lists;
 import com.twitter.hbc.ClientBuilder;
 import com.twitter.hbc.core.Client;
 import com.twitter.hbc.core.Constants;
@@ -17,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
@@ -32,7 +32,7 @@ public class TwitterProducer {
     String token = "";
     String secret = "";
 
-    List<String> terms = Lists.newArrayList("bitcoin", "usa", "politics", "sport", "soccer");
+    List<String> terms = Arrays.asList("kafka", "kafka-streams");
 
 
     public TwitterProducer() {
@@ -54,12 +54,10 @@ public class TwitterProducer {
         logger.info("Properties: " + appProps.toString());
 
         consumerKey = appProps.getProperty("apiKey");
-        ;
         consumerSecret = appProps.getProperty("apiSecretKey");
         token = appProps.getProperty("accessToken");
-        ;
         secret = appProps.getProperty("accessTokenSecret");
-        ;
+
 
         /** Set up your blocking queues: Be sure to size these properly based on expected TPS of your stream */
         BlockingQueue<String> msgQueue = new LinkedBlockingQueue<String>(1000);
