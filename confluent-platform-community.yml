@@ -11,8 +11,9 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     volumes:
-      - ./confluent-platform-community/zookeeper/data:/data
-      - ./confluent-platform-community/zookeeper/datalog:/datalog
+      - ./confluent-platform-community/zookeeper/data:/var/lib/zookeeper/data
+      - ./confluent-platform-community/zookeeper/log:/var/lib/zookeeper/log
+      - ./confluent-platform-community/zookeeper/secrets:/etc/zookeeper/secrets
 
   broker:
     image: confluentinc/cp-kafka:5.1.2
@@ -28,16 +29,17 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+      # KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:9092
-      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
-      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
-      CONFLUENT_METRICS_ENABLE: 'true'
-      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
+      # CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:9092
+      # CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
+      # CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+      CONFLUENT_METRICS_ENABLE: 'false'
+      # CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
     volumes:
       - ./confluent-platform-community/kafka/data:/var/lib/kafka/data
+      - ./confluent-platform-community/kafka/secrets:/etc/kafka/secrets
 
   schema-registry:
     image: confluentinc/cp-schema-registry:5.1.2
@@ -51,6 +53,8 @@ services:
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
+    volumes:
+      - ./confluent-platform-community/scema-registry/secrets:/etc/schema-registry/secrets
 
   rest-proxy:
     image: confluentinc/cp-kafka-rest:5.1.2

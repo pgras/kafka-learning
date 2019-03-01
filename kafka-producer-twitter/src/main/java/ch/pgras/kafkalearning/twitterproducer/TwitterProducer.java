@@ -1,5 +1,6 @@
 package ch.pgras.kafkalearning.twitterproducer;
 
+import com.google.gson.JsonParser;
 import com.twitter.hbc.ClientBuilder;
 import com.twitter.hbc.core.Client;
 import com.twitter.hbc.core.Constants;
@@ -91,7 +92,7 @@ public class TwitterProducer {
                 client.stop();
             }
             if (msg != null) {
-                logger.info(msg);
+                logger.info(extractTextFromTweet(msg));
 //                 producer.send(new ProducerRecord<>("twitter_tweets", null, msg), new Callback() {
 //                    @Override
 //                    public void onCompletion(RecordMetadata recordMetadata, Exception e) {
@@ -103,6 +104,16 @@ public class TwitterProducer {
             }
         }
         logger.info("End of application");
+    }
+
+    private static JsonParser jsonParser = new JsonParser();
+
+    private static String extractTextFromTweet(String tweetJson){
+        // gson library
+        return jsonParser.parse(tweetJson)
+                .getAsJsonObject()
+                .get("text")
+                .getAsString();
     }
 
     public Client createTwitterClient(BlockingQueue<String> msgQueue) {
