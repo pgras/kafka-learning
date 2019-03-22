@@ -1,0 +1,19 @@
+{
+  "namespace": "ch.pgras.kafkalearning.basic.avro",
+  "name": "Action",
+  "type": "record",
+  "version": "1",
+  "doc": "...",
+  "fields": [
+    {
+      "name": "type",
+      "type": "string",
+      "doc": "..."
+    },
+    {
+      "name": "payload",
+      "type": "string",
+      "doc": "..."
+    }
+  ]
+}

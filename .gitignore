@@ -12,5 +12,6 @@ buildNumber.properties
 
 confluent-kafka-simple/*
 confluent-platform-community/*
+cp-kafka-schemaregistry/*
 
 **/twitterApp.properties
