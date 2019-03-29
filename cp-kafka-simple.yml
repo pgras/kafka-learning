@@ -9,9 +9,9 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     volumes:
-      - ./confluent-kafka-simple/zookeeper/data:/var/lib/zookeeper/data
-      - ./confluent-kafka-simple/zookeeper/log:/var/lib/zookeeper/log
-      - ./confluent-kafka-simple/zookeeper/secrets:/etc/zookeeper/secrets
+      - ./cp-kafka-simple/zookeeper/data:/var/lib/zookeeper/data
+      - ./cp-kafka-simple/zookeeper/log:/var/lib/zookeeper/log
+      - ./cp-kafka-simple/zookeeper/secrets:/etc/zookeeper/secrets
 
   kafka:
     image: confluentinc/cp-kafka:latest
@@ -29,4 +29,4 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
-      - ./confluent-kafka-simple/kafka/data:/var/lib/kafka/data
+      - ./cp-kafka-simple/kafka/data:/var/lib/kafka/data

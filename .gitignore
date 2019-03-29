@@ -10,8 +10,8 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
-confluent-kafka-simple/*
-confluent-platform-community/*
+cp-kafka-simple/*
+cp-community/*
 cp-kafka-schemaregistry/*
 
 **/twitterApp.properties

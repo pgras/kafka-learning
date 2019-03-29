@@ -11,8 +11,6 @@
 
     <artifactId>kafka-avro-basics</artifactId>
 
-
-
     <!--necessary to resolve confluent dependencies-->
     <repositories>
         <repository>
