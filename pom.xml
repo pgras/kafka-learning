@@ -29,6 +29,7 @@
         <module>kafka-streams-filter-tweets</module>
         <module>kafka-streams-word-count</module>
         <module>kafka-avro-basics</module>
+        <module>kafka-streams-avro-demo</module>
     </modules>
 
     <dependencies>

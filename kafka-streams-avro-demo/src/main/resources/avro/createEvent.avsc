@@ -1,0 +1,19 @@
+{
+  "namespace": "ch.pgras.kafkalearning.streams.demo.avro",
+  "name": "CreateEvent",
+  "type": "record",
+  "version": "1",
+  "doc": "...",
+  "fields": [
+    {
+      "name": "actionType",
+      "type": "string",
+      "doc": "..."
+    },
+    {
+      "name": "payload",
+      "type": "string",
+      "doc": "..."
+    }
+  ]
+}
