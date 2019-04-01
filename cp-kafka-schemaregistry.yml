@@ -1,5 +1,5 @@
 ---
-version: '2'
+version: '3'
 services:
   zookeeper-1:
     image: confluentinc/cp-zookeeper:5.1.2
@@ -32,13 +32,12 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_HEAP_OPTS: -Xms512M -Xmx512M -verbose:gc
-
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_DELETE_TOPIC_ENABLE: "true"
-
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_DELETE_TOPIC_ENABLE: 'true'
       KAFKA_NUM_PARTITIONS: 4
-
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      CONFLUENT_METRICS_ENABLE: 'false'
+      KAFKA_CONFLUENT_SUPPORT_METRICS.ENABLE: 'false'
     volumes:
       - ./cp-kafka-schemaregistry/kafka/data:/var/lib/kafka/data
 
@@ -53,6 +52,26 @@ services:
       - 8081:8081
     environment:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry-1
+      SCHEMA_REGISTRY_LISTENERS: http://schema-registry-1:8081
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: "zookeeper-1:2181"
     volumes:
       - ./cp-kafka-schemaregistry/scema-registry/secrets:/etc/schema-registry/secrets
+
+  kafkahq-1:
+    image: tchiotludo/kafkahq
+    hostname: kafkahq-1
+    container_name: kafkahq-1
+    depends_on:
+      - zookeeper-1
+      - kafka-1
+      - schema-registry-1
+    ports:
+      - 8080:8080
+    environment:
+      KAFKAHQ_CONFIGURATION: |
+        kafkahq:
+          connections:
+            docker-kafka-server:
+              properties:
+                bootstrap.servers: "kafka-1:29092"
+              schema-registry: "schema-registry-1:8081"
