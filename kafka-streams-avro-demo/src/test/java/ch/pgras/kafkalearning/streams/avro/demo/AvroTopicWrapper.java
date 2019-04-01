@@ -1,4 +1,4 @@
-package ch.pgras.kafkalearning.basics.avro;
+package ch.pgras.kafkalearning.streams.avro.demo;
 
 import org.apache.avro.specific.SpecificRecord;
 import org.apache.kafka.clients.producer.ProducerRecord;
