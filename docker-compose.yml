@@ -12,10 +12,10 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
       KAFKA_HEAP_OPTS: -Xms32M -Xmx32M -verbose:gc
-    volumes:
-      - ./cp-kafka-schemaregistry/zookeeper/data:/var/lib/zookeeper/data
-      - ./cp-kafka-schemaregistry/zookeeper/log:/var/lib/zookeeper/log
-      - ./cp-kafka-schemaregistry/zookeeper/secrets:/etc/zookeeper/secrets
+    # volumes:
+    #  - ./cp/zookeeper/data:/var/lib/zookeeper/data
+    #  - ./cp/zookeeper/log:/var/lib/zookeeper/log
+    #  - ./cp/zookeeper/secrets:/etc/zookeeper/secrets
 
   kafka-1:
     image: confluentinc/cp-kafka:5.1.2
@@ -38,8 +38,8 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       CONFLUENT_METRICS_ENABLE: 'false'
       KAFKA_CONFLUENT_SUPPORT_METRICS.ENABLE: 'false'
-    volumes:
-      - ./cp-kafka-schemaregistry/kafka/data:/var/lib/kafka/data
+    # volumes:
+    #  - ./cp/kafka/data:/var/lib/kafka/data
 
   schema-registry-1:
     image: confluentinc/cp-schema-registry:5.1.2
@@ -54,8 +54,8 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry-1
       SCHEMA_REGISTRY_LISTENERS: http://schema-registry-1:8081
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: "zookeeper-1:2181"
-    volumes:
-      - ./cp-kafka-schemaregistry/scema-registry/secrets:/etc/schema-registry/secrets
+    # volumes:
+    #  - ./cp/scema-registry/secrets:/etc/schema-registry/secrets
 
   kafkahq-1:
     image: tchiotludo/kafkahq
