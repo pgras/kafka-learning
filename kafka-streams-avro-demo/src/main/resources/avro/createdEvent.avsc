@@ -1,6 +1,6 @@
 {
   "namespace": "ch.pgras.kafkalearning.streams.demo.avro",
-  "name": "CreateEvent",
+  "name": "CreatedEvent",
   "type": "record",
   "version": "1",
   "doc": "...",

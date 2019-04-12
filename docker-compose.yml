@@ -2,7 +2,7 @@
 version: '3'
 services:
   zookeeper-1:
-    image: confluentinc/cp-zookeeper:5.1.2
+    image: confluentinc/cp-zookeeper:5.2.1
     hostname: zookeeper-1
     container_name: zookeeper-1
     ports:
@@ -18,7 +18,7 @@ services:
     #  - ./cp/zookeeper/secrets:/etc/zookeeper/secrets
 
   kafka-1:
-    image: confluentinc/cp-kafka:5.1.2
+    image: confluentinc/cp-kafka:5.2.1
     hostname: kafka-1
     container_name: kafka-1
     depends_on:
@@ -42,7 +42,7 @@ services:
     #  - ./cp/kafka/data:/var/lib/kafka/data
 
   schema-registry-1:
-    image: confluentinc/cp-schema-registry:5.1.2
+    image: confluentinc/cp-schema-registry:5.2.1
     hostname: schema-registry-1
     container_name: schema-registry-1
     depends_on:

@@ -1,6 +1,6 @@
 {
   "namespace": "ch.pgras.kafkalearning.streams.demo.avro",
-  "name": "DeleteEvent",
+  "name": "DeletedEvent",
   "type": "record",
   "version": "1",
   "doc": "...",

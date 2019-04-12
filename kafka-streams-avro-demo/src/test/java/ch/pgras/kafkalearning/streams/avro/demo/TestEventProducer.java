@@ -1,7 +1,7 @@
 package ch.pgras.kafkalearning.streams.avro.demo;
 
-import ch.pgras.kafkalearning.streams.demo.avro.CreateEvent;
-import ch.pgras.kafkalearning.streams.demo.avro.DeleteEvent;
+import ch.pgras.kafkalearning.streams.demo.avro.CreatedEvent;
+import ch.pgras.kafkalearning.streams.demo.avro.DeletedEvent;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.avro.specific.SpecificRecord;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -16,7 +16,7 @@ import java.util.Properties;
 
 public class TestEventProducer {
 
-    public static final String createEventTopic = "create-event-avro";
+    public static final String CREATED_EVENT_TOPIC = "created-event-avro";
 
     private static final Logger logger = LoggerFactory.getLogger(TestEventProducer.class);
 
@@ -45,10 +45,10 @@ public class TestEventProducer {
             logger.info("done!");
         }));
 
-       for (int i=0; i<100; i++) {
-            CreateEvent event = createCreateEvent();
+        for (int i = 0; i < 100; i++) {
+            CreatedEvent event = createCreatedEvent();
             ProducerRecord<String, SpecificRecord> producerRecord = new ProducerRecord<>(
-                    createEventTopic, event.getActionType(), event
+                    CREATED_EVENT_TOPIC, event.getActionType(), event
             );
             logger.debug("Event to be sent: " + event);
             producer.send(producerRecord, (RecordMetadata metadata, Exception exception) -> {
@@ -61,17 +61,17 @@ public class TestEventProducer {
         }
     }
 
-    static CreateEvent createCreateEvent() {
-        return CreateEvent.newBuilder()
-                .setActionType("CreateEvent")
-                .setPayload("the payload of my event...")
+    static CreatedEvent createCreatedEvent() {
+        return CreatedEvent.newBuilder()
+                .setActionType("CreatedEvent")
+                .setPayload("the payload of my event..."+System.currentTimeMillis())
                 .build();
     }
 
-    static DeleteEvent createDeleteEvent() {
-        return DeleteEvent.newBuilder()
-                .setActionType("DeleteEvent")
-                .setPayload("the payload of my event...")
+    static DeletedEvent createDeletedEvent() {
+        return DeletedEvent.newBuilder()
+                .setActionType("DeletedEvent")
+                .setPayload("the payload of my event..."+System.currentTimeMillis())
                 .build();
     }
 }

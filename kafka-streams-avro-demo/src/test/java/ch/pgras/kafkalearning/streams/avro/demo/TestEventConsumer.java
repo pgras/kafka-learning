@@ -1,6 +1,6 @@
 package ch.pgras.kafkalearning.streams.avro.demo;
 
-import ch.pgras.kafkalearning.streams.demo.avro.CreateEvent;
+import ch.pgras.kafkalearning.streams.demo.avro.CreatedEvent;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.apache.avro.specific.SpecificRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -32,8 +32,8 @@ public class TestEventConsumer {
         properties.setProperty("schema.registry.url", "http://127.0.0.1:8081");
         properties.setProperty("specific.avro.reader", "true");
 
-        KafkaConsumer<String, CreateEvent> kafkaConsumer = new KafkaConsumer<>(properties);
-        String topic = TestEventProducer.createEventTopic;
+        KafkaConsumer<String, CreatedEvent> kafkaConsumer = new KafkaConsumer<>(properties);
+        String topic = TestEventProducer.CREATED_EVENT_TOPIC;
         kafkaConsumer.subscribe(Collections.singleton(topic));
 
         logger.info("Waiting for data...");
@@ -49,9 +49,9 @@ public class TestEventConsumer {
 
         while (true) {
 
-            ConsumerRecords<String, CreateEvent> records = kafkaConsumer.poll(Duration.ofMillis(1000));
+            ConsumerRecords<String, CreatedEvent> records = kafkaConsumer.poll(Duration.ofMillis(1000));
 
-            for (ConsumerRecord<String, CreateEvent> record : records) {
+            for (ConsumerRecord<String, CreatedEvent> record : records) {
                 SpecificRecord action = record.value();
                 logger.info(action.toString());
             }
